@@ -19,9 +19,9 @@ export const siteConfig = {
     { label: "Status", value: "Europe 2026" },
   ],
 
-  bookingEmail: "booking@fxxkstereotype.com",
-  pressEmail: "press@fxxkstereotype.com",
-  generalEmail: "hello@fxxkstereotype.com",
+  bookingEmail: "fxxkstereotype@gmail.com",
+  pressEmail: "fxxkstereotype@gmail.com",
+  generalEmail: "fxxkstereotype@gmail.com",
 
   socialLinks: [] as Array<{ label: string; url: string }>,
 
