@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600">
+<title>FXXK STEREOTYPE — Proposal for Tempio del Futuro Perduto</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #080808;
+    --fg: #e8e4df;
+    --fg-dim: rgba(232, 228, 223, 0.48);
+    --fg-muted: rgba(232, 228, 223, 0.28);
+    --accent: rgba(60, 90, 160, 0.6);
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --page-w: 1600px;
+  }
+
+  html { background: var(--bg); }
+
+  body {
+    width: var(--page-w);
+    margin: 0 auto;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Utility ── */
+  .inner { max-width: 1100px; margin: 0 auto; padding: 0 80px; }
+  .inner--wide { max-width: 1400px; margin: 0 auto; padding: 0 80px; }
+
+  /* ── Dividers ── */
+  .divider {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--fg-muted), transparent);
+  }
+
+  .divider--image {
+    height: 420px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .divider--image .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, transparent 50%, rgba(255,255,255,0.01) 100%);
+  }
+  .divider--image .placeholder span {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 25%, rgba(60,90,160,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 75%, rgba(180,60,50,0.05) 0%, transparent 50%);
+  }
+  .hero__eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 60px;
+    position: relative;
+  }
+  .hero__title {
+    font-family: var(--serif);
+    font-size: 148px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.88;
+    color: var(--fg);
+    margin-bottom: 50px;
+    position: relative;
+  }
+  .hero__subtitle {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.5;
+    max-width: 700px;
+    margin-bottom: 60px;
+    position: relative;
+  }
+  .hero__desc {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    line-height: 1.8;
+    max-width: 560px;
+    position: relative;
+  }
+  .hero__line {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(to bottom, var(--fg-muted), transparent);
+  }
+
+  /* ── Section Label ── */
+  .section-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 50px;
+  }
+
+  /* ── Opening Statement ── */
+  .opening { padding: 180px 0 160px; }
+  .opening__lead {
+    font-family: var(--serif);
+    font-size: 58px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--fg);
+    max-width: 900px;
+    margin-bottom: 70px;
+  }
+  .opening__body {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--fg-dim);
+    max-width: 680px;
+  }
+  .opening__body p { margin-bottom: 28px; }
+  .opening__body em {
+    font-style: normal;
+    color: var(--fg);
+    font-weight: 400;
+  }
+  .opening__roles {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.8;
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ── Why This Format ── */
+  .why { padding: 180px 0 160px; }
+  .why__headline {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--fg);
+    max-width: 800px;
+    margin-bottom: 70px;
+  }
+  .why__body {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--fg-dim);
+    max-width: 680px;
+  }
+  .why__body p { margin-bottom: 28px; }
+  .why__closing-line {
+    margin-top: 60px;
+    padding-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  /* ── Venue ── */
+  .venue { padding: 180px 0 160px; }
+  .venue__name {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--fg);
+    margin-bottom: 60px;
+  }
+  .venue__body {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--fg-dim);
+    max-width: 720px;
+  }
+  .venue__body p { margin-bottom: 28px; }
+  .venue__list {
+    margin-top: 50px;
+    padding-left: 30px;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+  .venue__list p {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.9;
+  }
+
+  /* ── Experience Structure ── */
+  .structure { padding: 180px 0 160px; }
+  .structure__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    margin-top: 80px;
+  }
+  .structure__chapter { padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+  .structure__num {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    margin-bottom: 30px;
+  }
+  .structure__title {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .structure__keywords {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--fg-dim);
+    line-height: 1.8;
+  }
+
+  /* ── Format ── */
+  .format { padding: 180px 0 160px; }
+  .format__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 80px;
+  }
+  .format__block {
+    padding: 50px 40px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.015);
+  }
+  .format__block-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .format__block-body {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--fg-dim);
+    line-height: 1.9;
+  }
+
+  /* ── Closing ── */
+  .closing { padding: 200px 0 180px; text-align: center; }
+  .closing__body {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--fg);
+    max-width: 800px;
+    margin: 0 auto 60px;
+  }
+  .closing__coda {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--fg-dim);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── Contact ── */
+  .contact {
+    padding: 120px 0 160px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .contact__label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 40px;
+  }
+  .contact__name {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 16px;
+  }
+  .contact__detail {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--fg-dim);
+    line-height: 2;
+  }
+
+  /* ── Print / PDF ── */
+  @media print {
+    body { width: 1600px; }
+    section, .divider, .divider--image { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HERO -->
+<section class="hero">
+  <p class="hero__eyebrow">Proposal for Tempio del Futuro Perduto — Milan</p>
+  <h1 class="hero__title">FXXK<br>STEREOTYPE</h1>
+  <p class="hero__subtitle">Against imposed roles. Toward self-naming.</p>
+  <p class="hero__desc">
+    A participatory exhibition and electronic music project<br>
+    on identity, pressure, and the right to become.
+  </p>
+  <div class="hero__line"></div>
+</section>
+
+<!-- ─── image divider ─── -->
+<div class="divider--image">
+  <div class="placeholder"><span>[ Image — blurred high-contrast portraiture / body fragment ]</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ OPENING -->
+<section class="opening">
+  <div class="inner">
+    <p class="section-label">Opening Statement</p>
+
+    <h2 class="opening__lead">We inherit names before we<br>choose language for ourselves.</h2>
+
+    <div class="opening__body">
+      <div class="opening__roles">
+        Worker. Mother. Outsider. Good girl. Breadwinner. Foreigner.<br>
+        Useful roles. Violent reductions. Social scripts repeated until they begin to feel natural.
+      </div>
+
+      <p>But identity is never singular.<br>
+      And no life can be contained by the labels that make it legible to others.</p>
+
+      <p><em>FXXK STEREOTYPE</em> is a multidisciplinary project about that break:<br>
+      the distance between imposed identity and lived selfhood,<br>
+      between social recognition and personal authorship.</p>
+
+      <p>It asks not only how we are seen,<br>
+      but how we reclaim the right to define ourselves together.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ WHY THIS FORMAT -->
+<section class="why">
+  <div class="inner">
+    <p class="section-label">Why This Format</p>
+
+    <h2 class="why__headline">This project is designed as a shared experience.</h2>
+
+    <div class="why__body">
+      <p>Image, text, sound, body, and public contribution speak to the same question.</p>
+
+      <p>The exhibition gives form to social roles, stereotype, contradiction, and reinvention.<br>
+      The music turns those tensions into collective rhythm.<br>
+      Participation allows the audience to move from witness to contributor.</p>
+    </div>
+
+    <div class="why__closing-line">
+      This is not simply a show.<br>
+      It is a space for collective re-articulation.
+    </div>
+  </div>
+</section>
+
+<!-- ─── image divider ─── -->
+<div class="divider--image">
+  <div class="placeholder"><span>[ Image — nightlife atmosphere / grainy texture / installation view ]</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FOR TEMPIO -->
+<section class="venue">
+  <div class="inner">
+    <p class="section-label">Venue-Specific Rationale</p>
+
+    <h2 class="venue__name">For Tempio del<br>Futuro Perduto</h2>
+
+    <div class="venue__body">
+      <p>I believe FXXK STEREOTYPE could resonate strongly with Tempio del Futuro Perduto because it is conceived not only as a cultural event, but as a community-facing, multidisciplinary format.</p>
+
+      <p>Its structure aligns with a space where electronic music, visual expression, experimentation, and participation already coexist. The project can open outward through an online open call, inviting artists and contributors to respond to the theme of imposed roles and self-definition, and then bring those voices into one shared physical environment.</p>
+
+      <p>For Tempio, I imagine the project as:</p>
+
+      <div class="venue__list">
+        <p>a participatory exhibition,</p>
+        <p>a social and visual archive of contemporary identity pressure,</p>
+        <p>and an electronic ritual of rupture, release, and redefinition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ EXPERIENCE STRUCTURE -->
+<section class="structure">
+  <div class="inner--wide">
+    <p class="section-label">Experience Structure</p>
+
+    <div class="structure__grid">
+      <div class="structure__chapter">
+        <div class="structure__num">01</div>
+        <h3 class="structure__title">Assigned</h3>
+        <p class="structure__keywords">Family roles. Work roles. Gender roles.<br>The identities that make us readable.</p>
+      </div>
+
+      <div class="structure__chapter">
+        <div class="structure__num">02</div>
+        <h3 class="structure__title">Conflict</h3>
+        <p class="structure__keywords">Shame, performance, exhaustion, contradiction, fragmentation.</p>
+      </div>
+
+      <div class="structure__chapter">
+        <div class="structure__num">03</div>
+        <h3 class="structure__title">Reclaiming</h3>
+        <p class="structure__keywords">Self-authorship, multiplicity, opacity, freedom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── image divider ─── -->
+<div class="divider--image">
+  <div class="placeholder"><span>[ Image — exhibition-like installation / type-driven graphic interlude ]</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FORMAT -->
+<section class="format">
+  <div class="inner--wide">
+    <p class="section-label">Format</p>
+
+    <div class="format__grid">
+      <div class="format__block">
+        <h3 class="format__block-title">Open Call</h3>
+        <p class="format__block-body">
+          Inviting artists, writers, image-makers, and the public to submit works or testimonies around stereotype, role pressure, and self-definition.
+        </p>
+      </div>
+
+      <div class="format__block">
+        <h3 class="format__block-title">Exhibition</h3>
+        <p class="format__block-body">
+          Visual, textual, audio, and mixed-media contributions gathered into a curatorial environment.
+        </p>
+      </div>
+
+      <div class="format__block">
+        <h3 class="format__block-title">Electronic Music</h3>
+        <p class="format__block-body">
+          A live or DJ-led sonic progression from discipline to fracture to liberation.
+        </p>
+      </div>
+
+      <div class="format__block">
+        <h3 class="format__block-title">Participation</h3>
+        <p class="format__block-body">
+          Audience text, voice, or live declaration integrated into the experience.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ CLOSING -->
+<section class="closing">
+  <div class="inner">
+    <p class="section-label">Closing</p>
+
+    <div class="closing__body">
+      For Tempio, FXXK STEREOTYPE would not be just an event to host,<br>
+      but a proposition to build with:<br><br>
+      socially aware but not didactic,<br>
+      emotionally charged but open,<br>
+      rooted in nightlife, yet reaching beyond it.
+    </div>
+
+    <div class="closing__coda">
+      A project about the moment a label stops holding.<br>
+      And something more alive begins.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ CONTACT -->
+<section class="contact">
+  <p class="contact__label">Contact</p>
+  <p class="contact__name">FXXK STEREOTYPE</p>
+  <p class="contact__detail">
+    fxxkstereotype@gmail.com<br>
+    Concept, curation, and artistic direction by Wenshuai
+  </p>
+</section>
+
+</body>
+</html>

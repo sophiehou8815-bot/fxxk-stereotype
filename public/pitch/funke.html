@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600">
+<title>FXXK STEREOTYPE — Proposal for Funke</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #080808;
+    --fg: #e8e4df;
+    --fg-dim: rgba(232, 228, 223, 0.48);
+    --fg-muted: rgba(232, 228, 223, 0.28);
+    --accent: rgba(180, 60, 50, 0.7);
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --page-w: 1600px;
+  }
+
+  html { background: var(--bg); }
+
+  body {
+    width: var(--page-w);
+    margin: 0 auto;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Utility ── */
+  .inner { max-width: 1100px; margin: 0 auto; padding: 0 80px; }
+  .inner--wide { max-width: 1400px; margin: 0 auto; padding: 0 80px; }
+
+  /* ── Section Spacing ── */
+  section { position: relative; }
+
+  /* ── Dividers ── */
+  .divider {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--fg-muted), transparent);
+  }
+
+  .divider--image {
+    height: 420px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .divider--image .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, transparent 50%, rgba(255,255,255,0.01) 100%);
+  }
+  .divider--image .placeholder span {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(180,60,50,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(60,80,140,0.06) 0%, transparent 50%);
+  }
+  .hero__eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 60px;
+    position: relative;
+  }
+  .hero__title {
+    font-family: var(--serif);
+    font-size: 148px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.88;
+    color: var(--fg);
+    margin-bottom: 50px;
+    position: relative;
+  }
+  .hero__subtitle {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.5;
+    max-width: 700px;
+    margin-bottom: 60px;
+    position: relative;
+  }
+  .hero__desc {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    line-height: 1.8;
+    max-width: 560px;
+    position: relative;
+  }
+  .hero__line {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(to bottom, var(--fg-muted), transparent);
+  }
+
+  /* ── Section Label ── */
+  .section-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 50px;
+  }
+
+  /* ── Opening Statement ── */
+  .opening { padding: 180px 0 160px; }
+  .opening__lead {
+    font-family: var(--serif);
+    font-size: 58px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--fg);
+    max-width: 900px;
+    margin-bottom: 70px;
+  }
+  .opening__body {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--fg-dim);
+    max-width: 680px;
+  }
+  .opening__body p { margin-bottom: 28px; }
+  .opening__body em {
+    font-style: normal;
+    color: var(--fg);
+    font-weight: 400;
+  }
+  .opening__roles {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.8;
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ── Why This Format ── */
+  .why { padding: 180px 0 160px; }
+  .why__headline {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--fg);
+    max-width: 800px;
+    margin-bottom: 70px;
+  }
+  .why__body {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--fg-dim);
+    max-width: 680px;
+  }
+  .why__body p { margin-bottom: 28px; }
+  .why__questions {
+    margin-top: 60px;
+    padding-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .why__questions p {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  /* ── Venue ── */
+  .venue { padding: 180px 0 160px; }
+  .venue__name {
+    font-family: var(--serif);
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--fg);
+    margin-bottom: 60px;
+  }
+  .venue__body {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--fg-dim);
+    max-width: 720px;
+  }
+  .venue__body p { margin-bottom: 28px; }
+  .venue__list {
+    margin-top: 50px;
+    padding-left: 30px;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+  .venue__list p {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--fg-dim);
+    line-height: 1.9;
+  }
+
+  /* ── Experience Structure ── */
+  .structure { padding: 180px 0 160px; }
+  .structure__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    margin-top: 80px;
+  }
+  .structure__chapter { padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+  .structure__num {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    margin-bottom: 30px;
+  }
+  .structure__title {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .structure__keywords {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--fg-dim);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .structure__desc {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--fg-muted);
+    line-height: 1.7;
+  }
+
+  /* ── Format ── */
+  .format { padding: 180px 0 160px; }
+  .format__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+    margin-top: 80px;
+  }
+  .format__block {
+    padding: 50px 40px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.015);
+  }
+  .format__block-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .format__block-body {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--fg-dim);
+    line-height: 1.9;
+  }
+  .format__block-body em {
+    display: block;
+    margin-top: 18px;
+    font-style: italic;
+    color: var(--fg-muted);
+    font-size: 14px;
+  }
+
+  /* ── Closing ── */
+  .closing { padding: 200px 0 180px; text-align: center; }
+  .closing__body {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--fg);
+    max-width: 800px;
+    margin: 0 auto 60px;
+  }
+  .closing__coda {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--fg-dim);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── Contact ── */
+  .contact {
+    padding: 120px 0 160px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .contact__label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 40px;
+  }
+  .contact__name {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 16px;
+  }
+  .contact__detail {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--fg-dim);
+    line-height: 2;
+  }
+
+  /* ── Print / PDF ── */
+  @media print {
+    body { width: 1600px; }
+    section, .divider, .divider--image { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HERO -->
+<section class="hero">
+  <p class="hero__eyebrow">Proposal for Funke — Ghent</p>
+  <h1 class="hero__title">FXXK<br>STEREOTYPE</h1>
+  <p class="hero__subtitle">Break the label. Name yourself.</p>
+  <p class="hero__desc">
+    A hybrid exhibition and electronic music concept<br>
+    on identity, projection, and self-definition.
+  </p>
+  <div class="hero__line"></div>
+</section>
+
+<!-- ─── image divider ─── -->
+<div class="divider--image">
+  <div class="placeholder"><span>[ Image — blurred high-contrast portraiture / silhouette ]</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ OPENING -->
+<section class="opening">
+  <div class="inner">
+    <p class="section-label">Opening Statement</p>
+
+    <h2 class="opening__lead">We are all read<br>before we are known.</h2>
+
+    <div class="opening__body">
+      <p>By family. By work. By gender. By culture.<br>
+      By the roles we perform too well.</p>
+
+      <div class="opening__roles">
+        Daughter. Boss. Employee. Lover. Son. Immigrant. Provider.<br>
+        Necessary identities, perhaps. But never the whole story.
+      </div>
+
+      <p><em>FXXK STEREOTYPE</em> begins there:<br>
+      in the tension between who we are expected to be<br>
+      and who we become when we reclaim the right to define ourselves.</p>
+
+      <p>This project brings together exhibition, electronic music, and audience participation under one shared curatorial thread.<br>
+      Not as separate formats, but as one continuous experience.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ WHY THIS FORMAT -->
+<section class="why">
+  <div class="inner">
+    <p class="section-label">Why This Format</p>
+
+    <h2 class="why__headline">This is not an exhibition<br>next to a party.</h2>
+
+    <div class="why__body">
+      <p>It is one concept unfolding through multiple forms.</p>
+
+      <p>Visual works create reflection, confrontation, and recognition.<br>
+      Electronic music transforms the same tension into movement, repetition, pressure, rupture, and release.<br>
+      The audience is not only invited to watch, but to locate themselves inside the question.</p>
+    </div>
+
+    <div class="why__questions">
+      <p>Who names us?</p>
+      <p>Which labels shape us?</p>
+      <p>Which ones protect us, and which ones confine us?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── image divider ─── -->
+<div class="divider--image">
+  <div class="placeholder"><span>[ Image — nightlife atmosphere / grainy texture / body in motion ]</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FOR FUNKE -->
+<section class="venue">
+  <div class="inner">
+    <p class="section-label">Venue-Specific Rationale</p>
+
+    <h2 class="venue__name">For Funke</h2>
+
+    <div class="venue__body">
+      <p>I see FXXK STEREOTYPE as a natural fit for Funke because the project lives exactly in the intersection that makes the space distinctive: club culture, art, curiosity, atmosphere, and identity exploration.</p>
+
+      <p>Rather than proposing a standard event booking, I imagine this as a carefully curated concept night:</p>
+
+      <div class="venue__list">
+        <p>an exhibition-led arrival,</p>
+        <p>a gradual deepening of mood and tension,</p>
+        <p>and an electronic set that turns reflection into physical release.</p>
+      </div>
+
+      <p style="margin-top: 40px;">The project would resonate with a space that already understands nightlife not only as entertainment, but as a site of presence, experimentation, and becoming.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ EXPERIENCE STRUCTURE -->
+<section class="structure">
+  <div class="inner--wide">
+    <p class="section-label">Experience Structure</p>
+
+    <div class="structure__grid">
+      <div class="structure__chapter">
+        <div class="structure__num">01</div>
+        <h3 class="structure__title">Assigned Identity</h3>
+        <p class="structure__keywords">Labels, expectations, scripts, roles.</p>
+        <p class="structure__desc">The social language placed onto the body.</p>
+      </div>
+
+      <div class="structure__chapter">
+        <div class="structure__num">02</div>
+        <h3 class="structure__title">Fracture</h3>
+        <p class="structure__keywords">Tension, conflict, misfit, overexposure.</p>
+        <p class="structure__desc">The moment when identity becomes pressure.</p>
+      </div>
+
+      <div class="structure__chapter">
+        <div class="structure__num">03</div>
+        <h3 class="structure__title">Self-Naming</h3>
+        <p class="structure__keywords">Ambiguity, refusal, reinvention.</p>
+        <p class="structure__desc">The point where self-definition begins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── image divider ─── -->
+<div class="divider--image">
+  <div class="placeholder"><span>[ Image — exhibition-like installation / type-driven graphic interlude ]</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ FORMAT -->
+<section class="format">
+  <div class="inner--wide">
+    <p class="section-label">Format</p>
+
+    <div class="format__grid">
+      <div class="format__block">
+        <h3 class="format__block-title">Exhibition</h3>
+        <p class="format__block-body">
+          Visual, textual, photographic, sound-based, or moving-image works responding to imposed identities and chosen selves.
+        </p>
+      </div>
+
+      <div class="format__block">
+        <h3 class="format__block-title">Electronic Music</h3>
+        <p class="format__block-body">
+          A sonic arc moving through control, rupture, and release.
+        </p>
+      </div>
+
+      <div class="format__block">
+        <h3 class="format__block-title">Participation</h3>
+        <p class="format__block-body">
+          Optional audience intervention:
+          <em>"They told me I should be ____ / I choose to be ____."</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ CLOSING -->
+<section class="closing">
+  <div class="inner">
+    <p class="section-label">Closing</p>
+
+    <div class="closing__body">
+      For Funke, I imagine FXXK STEREOTYPE as an intimate but high-impact hybrid evening:<br>
+      visually sharp, emotionally resonant, and physically alive.
+    </div>
+
+    <div class="closing__coda">
+      A space to reflect.<br>
+      A space to move.<br>
+      A space to become unreadable again.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ CONTACT -->
+<section class="contact">
+  <p class="contact__label">Contact</p>
+  <p class="contact__name">FXXK STEREOTYPE</p>
+  <p class="contact__detail">
+    fxxkstereotype@gmail.com<br>
+    Concept, curation, and artistic direction by Wenshuai
+  </p>
+</section>
+
+</body>
+</html>
